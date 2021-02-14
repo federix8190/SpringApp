@@ -21,10 +21,10 @@ public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
     //@Value("${senac.app.jwtSecret}")
-    private String jwtSecret = "adasdsa";
+    private String jwtSecret = "17ec18e9-2d0e-427b-902c-912296d3875d-b47dbf9b-c3cc-4510-bb13-2c398de06f0d-1f314563-881b-49d3-be1c-7619ad2b82a4";
 
     //@Value("${senac.app.jwtExpirationMs}")
-    private int jwtExpirationMs = 1000;
+    private int jwtExpirationMs = 86400000;
 
     public String generateJwtToken(Authentication authentication) {
 

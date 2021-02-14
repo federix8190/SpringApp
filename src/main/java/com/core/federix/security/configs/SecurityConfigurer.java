@@ -2,6 +2,7 @@ package com.core.federix.security.configs;
 
 import java.util.Arrays;
 
+import com.core.federix.security.CustomPasswordEncoder;
 import com.core.federix.security.jwt.AuthTokenFilter;
 import com.core.federix.services.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +35,20 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 		return new AuthTokenFilter();
 	}
 
-	/*@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(customUserDetailService);
-	}*/
-
 	@Override
 	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
 		authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	}
+
+	@Override
+	@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
 	}
 
 	/*@Bean
@@ -51,6 +58,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
+
+		System.err.println("fede configure");
 		httpSecurity.cors().and().csrf().disable().authorizeRequests()
 				.antMatchers("/test/**", "/api/auth/signin").permitAll().anyRequest()
 				.authenticated().and().sessionManagement()
@@ -68,16 +77,4 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 		source.registerCorsConfiguration("/**", configuration.applyPermitDefaultValues());
 		return source;
 	}
-
-	@Override
-	@Bean
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
-	}
-
 }

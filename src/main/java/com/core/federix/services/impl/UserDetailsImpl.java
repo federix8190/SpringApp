@@ -35,6 +35,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public static UserDetailsImpl build(Usuario user) {
         Set<GrantedAuthority> authoritySet = new HashSet<>();
+        System.err.println("UserDetailsImpl build : " + user);
 
         /*for (UsuarioRol userRol: user.getUsuarioRolCollection()) {
             for (RolPermiso rolPermiso: userRol.getRol().getRolPermisoCollection()) {
@@ -44,7 +45,7 @@ public class UserDetailsImpl implements UserDetails {
 
         return new UserDetailsImpl(
                 user.getId(),
-                user.getName(),
+                user.getMail(),
                 user.getMail(),
                 user.getPassword(),
                 authoritySet);

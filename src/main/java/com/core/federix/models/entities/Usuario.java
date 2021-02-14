@@ -16,11 +16,11 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int id, String name, String mail) {
+    public Usuario(int id, String name, String mail, String password) {
         this.id = id;
         this.name = name;
         this.mail = mail;
-        this.password = "testing";
+        this.password = password;
     }
 
     public Integer getId() {
