@@ -46,13 +46,22 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 
-	@Bean
+	/*@Bean
 	public PasswordEncoder passwordEncoder() {
 		return NoOpPasswordEncoder.getInstance();
+	}*/
+
+	/**
+	 * Para codificar el password
+	 * @return
+	 */
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new CustomPasswordEncoder();
 	}
 
 	/**
-	 * Para configurar las urls
+	 * Para configurar las urls protegidas
 	 * @param httpSecurity
 	 * @throws Exception
 	 */
@@ -69,7 +78,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 	}
 
 	/**
-	 * Para permitir conexiones dese el frontend
+	 * Para permitir conexiones externas (frontend)
 	 * @return
 	 */
 	@Bean

@@ -6,6 +6,7 @@ import java.security.MessageDigest;
 import java.util.Formatter;
 
 public class CustomPasswordEncoder implements PasswordEncoder {
+
     @Override
     public String encode(CharSequence charSequence) {
         return encryptSHA1(charSequence.toString());

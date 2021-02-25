@@ -1,57 +1,73 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.core.federix.models.entities;
 
+import lombok.Getter;
+import lombok.Setter;
 
-public class Usuario {
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+import java.util.Date;
 
-    private Integer id;
-    private String name;
+@Entity
+@Table(name = "usuario")
+@Getter
+@Setter
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Usuario.findByUsuarioLogueo", query = "SELECT u FROM Usuario u WHERE u.usuarioLogueo = :usuarioLogueo")
+})
+public class Usuario  implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_usuario")
+    private Integer idUsuario;
+
+    @Basic(optional = false)
+    @Column(name = "nombre_y_apellido")
+    private String nombreYApellido;
+
+    @Basic(optional = false)
+    @Column(name = "mail")
     private String mail;
+
+    @Basic(optional = false)
+    @Column(name = "usuario_logueo")
+    private String usuarioLogueo;
+
+    @Basic(optional = false)
+    @Column(name = "password")
     private String password;
+
+    @Basic(optional = false)
+    @Column(name = "cant_intento_fallido")
+    private int cantIntentoFallido;
+
+    @Basic(optional = false)
+    @Column(name = "pass_vigente")
+    private String passVigente;
+
+    @Basic(optional = false)
+    @Column(name = "fecha_ult_act_pass")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaUltActPass;
+
+    @Basic(optional = false)
+    @Column(name = "token_cambio_pass")
+    private String tokenCambioPass;
+
+    @Basic(optional = false)
+    @Column(name = "activo")
+    private Boolean activo;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String name, String mail, String password) {
-        this.id = id;
-        this.name = name;
-        this.mail = mail;
-        this.password = password;
+    public Usuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

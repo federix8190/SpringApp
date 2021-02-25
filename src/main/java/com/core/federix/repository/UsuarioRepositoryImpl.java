@@ -3,7 +3,7 @@ package com.core.federix.repository;
 import com.core.federix.models.entities.Usuario;
 import org.springframework.stereotype.Service;
 
-@Service
+/*@Service
 public class UsuarioRepositoryImpl implements UsuarioRepository {
 
     @Override
@@ -19,3 +19,4 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
         }
     }
 }
+*/
