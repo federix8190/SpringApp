@@ -20,11 +20,11 @@ public class JwtUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    //@Value("${senac.app.jwtSecret}")
-    private String jwtSecret = "17ec18e9-2d0e-427b-902c-912296d3875d-b47dbf9b-c3cc-4510-bb13-2c398de06f0d-1f314563-881b-49d3-be1c-7619ad2b82a4";
+    @Value("${federix.app.jwtSecret}")
+    private String jwtSecret;
 
-    //@Value("${senac.app.jwtExpirationMs}")
-    private int jwtExpirationMs = 86400000;
+    @Value("${federix.app.jwtExpirationMs}")
+    private int jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {
 
@@ -44,7 +44,7 @@ public class JwtUtils {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
-    /*public boolean validateJwtToken(String authToken) {
+    public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;
@@ -60,5 +60,5 @@ public class JwtUtils {
             logger.error("JWT claims string is empty: {}", e.getMessage());
         }
         return false;
-    }*/
+    }
 }

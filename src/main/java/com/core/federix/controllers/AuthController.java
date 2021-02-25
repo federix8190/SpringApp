@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,19 +28,21 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        try {
 
+        try {
             System.err.println("fede AuthController");
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtTokenUtil.generateJwtToken(authentication);
-
             return ResponseEntity.ok(new AuthenticationResponse(jwt, 1L));
 
+        } catch (AuthenticationException e) {
+            System.err.println("Error en autenticacion : " + e.getMessage());
+            return new ResponseEntity(new Error(e), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Error generico : " + e.getMessage());
             return new ResponseEntity(new Error(e), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

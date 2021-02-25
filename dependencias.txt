@@ -1,0 +1,6 @@
+spring-boot-starter-web
+spring-boot-starter-security
+io.jsonwebtoken
+
+
+Request ----> AuthTokenFilter ---> JwtUtils.validateJwtToken ---> JwtUtils.getUserNameFromJwtToken ---> userDetailsService.loadUserByUsername

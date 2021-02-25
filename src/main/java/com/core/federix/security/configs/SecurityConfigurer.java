@@ -51,11 +51,11 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 		return NoOpPasswordEncoder.getInstance();
 	}
 
-	/*@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new CustomPasswordEncoder();
-	}*/
-
+	/**
+	 * Para configurar las urls
+	 * @param httpSecurity
+	 * @throws Exception
+	 */
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 
@@ -68,6 +68,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 		httpSecurity.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 
+	/**
+	 * Para permitir conexiones dese el frontend
+	 * @return
+	 */
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
