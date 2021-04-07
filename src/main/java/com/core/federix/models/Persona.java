@@ -22,6 +22,10 @@ public class Persona {
         this.edad = edad;
     }
 
+    public String saludo() {
+        return "Hola mi nombre es " + this.nombre + " " + this.apellido;
+    }
+
     /*public int getId() {
         return id;
     }
