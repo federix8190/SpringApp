@@ -1,10 +1,5 @@
 package com.core.federix.models;
 
-import lombok.Data;
-import lombok.ToString;
-
-@Data
-//@ToString
 public class Persona {
 
     private int id;
@@ -22,7 +17,7 @@ public class Persona {
         this.edad = edad;
     }
 
-    /*public int getId() {
+    public int getId() {
         return id;
     }
 
@@ -52,5 +47,5 @@ public class Persona {
 
     public void setEdad(int edad) {
         this.edad = edad;
-    }*/
+    }
 }
