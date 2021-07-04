@@ -55,7 +55,6 @@ public class TestController {
 	@GetMapping(value="/persons/nombres")
 	public List<String> mayusculas() {
 
-		List<String> res = new ArrayList<>();
 		List<String> collect = personas.stream().map(Persona::saludo).collect(Collectors.toList());
 		return collect;
 	}
